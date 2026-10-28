@@ -20,13 +20,18 @@ const spoken=[];
 w.speechSynthesis={getVoices:()=>[],cancel(){},speak:u=>spoken.push(u.text)};
 w.SpeechSynthesisUtterance=function(text){this.text=text};
 w.HTMLElement.prototype.scrollIntoView=function(){};
-for(const file of ['vendor/pinyin-pro.js','curriculum.js','examples.js','readings.js','catalogue.js','learning.js','catalogue-ui.js','app.js'])new vm.Script(fs.readFileSync(file,'utf8'),{filename:file}).runInContext(ctx);
+for(const file of ['vendor/pinyin-pro.js','curriculum.js','examples.js','readings.js','catalogue.js','learning.js','catalogue-ui.js','teacher-focus.js','app.js'])new vm.Script(fs.readFileSync(file,'utf8'),{filename:file}).runInContext(ctx);
 function plain(node){const c=node.cloneNode(true);c.querySelectorAll('rt').forEach(r=>r.remove());return c.textContent}
 function change(node,value,event='change'){node.value=value;node.dispatchEvent(new w.Event(event,{bubbles:true}))}
 function clickText(text){const b=[...d.querySelectorAll('button')].find(b=>plain(b)===text);assert(b,`Button missing: ${text}`);b.click()}
 function coverage(root){const walker=d.createTreeWalker(root,w.NodeFilter.SHOW_TEXT);let n;while(n=walker.nextNode()){if(n.parentElement.closest('rt,select,textarea,[data-no-pinyin],.hanzi,script'))continue;if(/[\u3400-\u9fff]/u.test(n.textContent))assert(n.parentElement.closest('ruby'),`Unannotated: ${n.textContent}`)}for(const rt of root.querySelectorAll('rt'))assert(rt.textContent.trim(),`Empty pinyin for ${rt.parentElement.textContent}`)}
 assert.equal(d.title,'廖八一的小芽学堂');
 coverage(d.querySelector('main'));
+assert(d.querySelector('.focus-quiz'));
+const focusStars=Number(d.querySelector('#stars').textContent);
+d.querySelector('[data-answer="ei"]').click();assert(plain(d.querySelector('.focus-question .feedback')).includes('再试'));
+d.querySelector('[data-answer="ie"]').click();d.querySelector('[data-answer="ie"]').click();assert.equal(Number(d.querySelector('#stars').textContent),focusStars+1);
+const cap=d.querySelector('[aria-label="秋游选择帽子"]');cap.checked=true;clickText('🔊 说说我的选择');assert.equal(spoken.at(-1),'廖八一想带帽子去秋游。');
 d.querySelector('[data-tab="words"]').click();
 assert.equal(d.querySelectorAll('.word-card').length,18);
 assert.equal(w.getCharacters(curriculum[0],'write').length,100);
