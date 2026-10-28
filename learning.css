@@ -8,3 +8,17 @@ ruby{ruby-align:center;line-height:2.4;white-space:nowrap;margin:0 .045em}rt{fon
 .variants{margin-top:18px;padding-top:10px;border-top:1px dashed #d7e1cf}.variants button{margin:4px 8px 4px 0;font-size:20px;line-height:2.5}
 
 .hide-pinyin .phonetic{visibility:hidden}
+
+/* Tablet layouts follow viewport width, including iPad rotation and split view. */
+.hero>div:first-child{min-width:0}.word-controls>*{min-width:0}.import-story>*{max-width:100%}
+@media(min-width:701px) and (max-width:1100px){
+  header{flex-wrap:wrap;gap:18px}.header-tools{flex-wrap:wrap;margin-left:auto}
+  .hero{padding:28px 30px;gap:20px}.hero>div:first-child{flex:1}
+  .hero h1{font-size:clamp(26px,3.2vw,35px)}
+  .garden{flex:0 0 28%;max-width:28%}.garden>div{font-size:clamp(35px,5vw,55px)}.garden>span{font-size:48px;padding-right:0}.garden small{font-size:11px}
+  nav{gap:8px}nav button{font-size:15px;padding:14px 6px}
+  .word-grid,.grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .word-controls label{flex:1 1 180px}.word-controls select{width:100%;max-width:100%}
+  .reading-line{font-size:27px}.example-sentence{font-size:28px}
+}
+@media(min-width:701px) and (max-width:900px){.hero .garden{display:none}}

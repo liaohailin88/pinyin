@@ -1,5 +1,6 @@
 // Ancient poems in the public domain and original short reading passages.
 const READINGS = [
+  {id:'brothers',title:'我是哥哥',book:'upper',kind:'原创短文',body:'@是哥哥，他有两个弟弟。\n搭积木时，@把积木分给两个弟弟。\n你搭一块，我搭一块，大家一起搭起一座小房子。\n兄弟三人一起玩，真开心！'},
   {id:'jiangnan',title:'江南',author:'汉乐府',book:'upper',kind:'教材古诗',body:'江南可采莲，莲叶何田田。\n鱼戏莲叶间。\n鱼戏莲叶东，鱼戏莲叶西，\n鱼戏莲叶南，鱼戏莲叶北。'},
   {id:'jingyesi',title:'静夜思',author:'唐 · 李白',book:'lower',kind:'教材古诗',body:'床前明月光，疑是地上霜。\n举头望明月，低头思故乡。'},
   {id:'chishang',title:'池上',author:'唐 · 白居易',book:'lower',kind:'教材古诗',body:'小娃撑小艇，偷采白莲回。\n不解藏踪迹，浮萍一道开。'},
