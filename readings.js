@@ -1,13 +1,15 @@
 // Ancient poems in the public domain and original short reading passages.
 const READINGS = [
+  {id:'hua',title:'画',author:'古诗',book:'upper',kind:'教材古诗',body:'远看山有色，近听水无声。\n春去花还在，人来鸟不惊。'},
+  {id:'feng',title:'风',author:'唐 · 李峤',book:'upper',kind:'教材古诗',body:'解落三秋叶，能开二月花。\n过江千尺浪，入竹万竿斜。'},
   {id:'brothers',title:'我是哥哥',book:'upper',kind:'原创短文',body:'@是哥哥，他有两个弟弟。\n搭积木时，@把积木分给两个弟弟。\n你搭一块，我搭一块，大家一起搭起一座小房子。\n兄弟三人一起玩，真开心！'},
   {id:'jiangnan',title:'江南',author:'汉乐府',book:'upper',kind:'教材古诗',body:'江南可采莲，莲叶何田田。\n鱼戏莲叶间。\n鱼戏莲叶东，鱼戏莲叶西，\n鱼戏莲叶南，鱼戏莲叶北。'},
   {id:'jingyesi',title:'静夜思',author:'唐 · 李白',book:'lower',kind:'教材古诗',body:'床前明月光，疑是地上霜。\n举头望明月，低头思故乡。'},
   {id:'chishang',title:'池上',author:'唐 · 白居易',book:'lower',kind:'教材古诗',body:'小娃撑小艇，偷采白莲回。\n不解藏踪迹，浮萍一道开。'},
   {id:'xiaochi',title:'小池',author:'宋 · 杨万里',book:'lower',kind:'教材古诗',body:'泉眼无声惜细流，树阴照水爱晴柔。\n小荷才露尖尖角，早有蜻蜓立上头。'},
-  {id:'yong-e',title:'咏鹅',author:'唐 · 骆宾王',book:'extra',kind:'拓展古诗',body:'鹅，鹅，鹅，曲项向天歌。\n白毛浮绿水，红掌拨清波。'},
+  {id:'yong-e',title:'咏鹅',author:'唐 · 骆宾王',book:'upper',kind:'教材古诗',body:'鹅，鹅，鹅，曲项向天歌。\n白毛浮绿水，红掌拨清波。'},
   {id:'chunxiao',title:'春晓',author:'唐 · 孟浩然',book:'extra',kind:'拓展古诗',body:'春眠不觉晓，处处闻啼鸟。\n夜来风雨声，花落知多少。'},
-  {id:'minnong',title:'悯农',author:'唐 · 李绅',book:'extra',kind:'拓展古诗',body:'锄禾日当午，汗滴禾下土。\n谁知盘中餐，粒粒皆辛苦。'},
+  {id:'minnong',title:'悯农',author:'唐 · 李绅',book:'upper',kind:'教材古诗',body:'锄禾日当午，汗滴禾下土。\n谁知盘中餐，粒粒皆辛苦。'},
   {id:'name',title:'我的名字',book:'upper',kind:'原创短文',body:'我叫@，我上一年级。\n我爱读书，也爱画画。\n今天，我学会了一个新字。\n我把这个字读给爸爸妈妈听。'},
   {id:'morning',title:'上学的早晨',book:'upper',kind:'原创短文',body:'早上，太阳出来了。\n@背上书包，和妈妈一起去学校。\n路边的小花开了，小鸟在树上唱歌。\n@向老师问好，新的一天开始了。'},
   {id:'leaves',title:'秋天的叶子',book:'upper',kind:'原创短文',body:'秋天到了，树叶慢慢变黄了。\n@捡起一片落叶。\n叶子像一只小船，又像一把小扇子。\n@把叶子夹进书里，做成一张书签。'},

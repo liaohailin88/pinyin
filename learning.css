@@ -22,3 +22,5 @@ ruby{ruby-align:center;line-height:2.4;white-space:nowrap;margin:0 .045em}rt{fon
   .reading-line{font-size:27px}.example-sentence{font-size:28px}
 }
 @media(min-width:701px) and (max-width:900px){.hero .garden{display:none}}
+
+.catalogue-search input{width:100%;font:inherit;color:#315d49;padding:12px;border:1px solid #d0decb;border-radius:9px;margin:12px 0}.catalogue-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.catalogue-list>.hint,.catalogue-list>.empty{grid-column:1/-1}.catalogue-card{border:1px solid #dfe8d8;border-radius:14px;padding:20px;min-width:0;background:#fafcf6}.catalogue-card h3{line-height:2.5;margin:8px 0 14px}.catalogue-card .actions{margin-top:18px}.catalogue-card .hint{line-height:2.5}@media(max-width:700px){.catalogue-list{grid-template-columns:minmax(0,1fr)}}
