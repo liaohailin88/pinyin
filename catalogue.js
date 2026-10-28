@@ -33,3 +33,6 @@ const CATALOGUE_GUIDES = {
   '洗手歌':'学习按顺序洗手。读的时候，可以一边听节奏，一边做洗手动作。',
   '欢迎台湾小朋友':'学习礼貌待客。想一想：有新朋友来学校，你会怎样介绍、怎样欢迎？'
 };
+
+// Keep legacy-only titles accessible without pretending they are new-edition lessons.
+for(const story of PROVIDED_READINGS){if(!TEXTBOOK_CATALOGUE.some(e=>e.book===story.book&&e.title===story.title))TEXTBOOK_CATALOGUE.push({id:'catalogue-'+story.id,book:story.book,section:'家长提供合集 · '+story.sourceSection,title:story.title})}
