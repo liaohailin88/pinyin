@@ -1,0 +1,27 @@
+// Ancient poems in the public domain and original short reading passages.
+const READINGS = [
+  {id:'jiangnan',title:'江南',author:'汉乐府',book:'upper',kind:'教材古诗',body:'江南可采莲，莲叶何田田。\n鱼戏莲叶间。\n鱼戏莲叶东，鱼戏莲叶西，\n鱼戏莲叶南，鱼戏莲叶北。'},
+  {id:'jingyesi',title:'静夜思',author:'唐 · 李白',book:'lower',kind:'教材古诗',body:'床前明月光，疑是地上霜。\n举头望明月，低头思故乡。'},
+  {id:'chishang',title:'池上',author:'唐 · 白居易',book:'lower',kind:'教材古诗',body:'小娃撑小艇，偷采白莲回。\n不解藏踪迹，浮萍一道开。'},
+  {id:'xiaochi',title:'小池',author:'宋 · 杨万里',book:'lower',kind:'教材古诗',body:'泉眼无声惜细流，树阴照水爱晴柔。\n小荷才露尖尖角，早有蜻蜓立上头。'},
+  {id:'yong-e',title:'咏鹅',author:'唐 · 骆宾王',book:'extra',kind:'拓展古诗',body:'鹅，鹅，鹅，曲项向天歌。\n白毛浮绿水，红掌拨清波。'},
+  {id:'chunxiao',title:'春晓',author:'唐 · 孟浩然',book:'extra',kind:'拓展古诗',body:'春眠不觉晓，处处闻啼鸟。\n夜来风雨声，花落知多少。'},
+  {id:'minnong',title:'悯农',author:'唐 · 李绅',book:'extra',kind:'拓展古诗',body:'锄禾日当午，汗滴禾下土。\n谁知盘中餐，粒粒皆辛苦。'},
+  {id:'name',title:'我的名字',book:'upper',kind:'原创短文',body:'我叫@，我上一年级。\n我爱读书，也爱画画。\n今天，我学会了一个新字。\n我把这个字读给爸爸妈妈听。'},
+  {id:'morning',title:'上学的早晨',book:'upper',kind:'原创短文',body:'早上，太阳出来了。\n@背上书包，和妈妈一起去学校。\n路边的小花开了，小鸟在树上唱歌。\n@向老师问好，新的一天开始了。'},
+  {id:'leaves',title:'秋天的叶子',book:'upper',kind:'原创短文',body:'秋天到了，树叶慢慢变黄了。\n@捡起一片落叶。\n叶子像一只小船，又像一把小扇子。\n@把叶子夹进书里，做成一张书签。'},
+  {id:'bag',title:'书包里的朋友',book:'upper',kind:'原创短文',body:'@打开小书包。\n书、本子和铅笔，都是学习的好朋友。\n每次用完，@都把它们放回原处。\n小书包整整齐齐，找东西真方便！'},
+  {id:'moon',title:'和月亮说晚安',book:'upper',kind:'原创短文',body:'夜晚，@站在窗前看月亮。\n月亮有时圆圆的，有时弯弯的。\n天上的星星一闪一闪。\n@轻轻地说：“月亮，晚安！”'},
+  {id:'friend',title:'一起读书',book:'upper',kind:'原创短文',body:'@带来一本有趣的书。\n朋友想看，@就把书放在两人中间。\n你读一句，我读一句。\n读到好玩的地方，大家一起笑了。'},
+  {id:'good',title:'一件好事',book:'upper',kind:'原创短文',body:'地上有一张纸，@弯腰把它捡起来。\n@把纸放进垃圾桶。\n老师微笑着说：“谢谢你！”\n@也笑了，心里暖暖的。'},
+  {id:'hand',title:'我的小手',book:'upper',kind:'原创短文',body:'@有一双小手。\n小手会写字，会画画，还会整理书包。\n吃饭前，小手洗得干干净净。\n@说：“自己的事情，我要学着自己做。”'},
+  {id:'seed',title:'一粒种子',book:'lower',kind:'原创短文',body:'春天，@在花盆里种下一粒种子。\n@给种子浇了一点水，把花盆放在有阳光的地方。\n过了几天，泥土里冒出一棵小芽。\n@惊喜地说：“你终于出来啦！”'},
+  {id:'rain',title:'雨后的发现',book:'lower',kind:'原创短文',body:'雨停了，@和爸爸一起出门。\n草叶上有亮晶晶的小水珠。\n小路旁，一只蜗牛慢慢向前爬。\n@蹲下来静静地看，没有打扰它。'},
+  {id:'frog',title:'池塘边',book:'lower',kind:'原创短文',body:'夏天，@来到池塘边。\n荷叶圆圆的，荷花轻轻摇动。\n一只青蛙蹲在荷叶上，呱呱地叫。\n@站在安全的地方，安静地欣赏这幅美丽的画。'},
+  {id:'clock',title:'一分钟的约定',book:'lower',kind:'原创短文',body:'@和爸爸看着时钟。\n“我们用一分钟，把桌子整理好。”爸爸说。\n@收好铅笔，放好本子，又摆正了椅子。\n原来，短短的一分钟，也能做不少事情。'},
+  {id:'math-story',title:'分苹果',book:'lower',kind:'原创短文',body:'盘子里有八个苹果。\n@分给爸爸两个，分给妈妈两个。\n盘子里还剩几个呢？\n@画了八个小圆圈，算出还剩四个苹果。'},
+  {id:'brave',title:'我来试一试',book:'lower',kind:'原创短文',body:'有一个字，@读了两遍还是不认识。\n@没有着急，先看拼音，再听爸爸读。\n练习几次后，@终于读对了。\n遇到困难，慢慢来，多试一次就多一分进步。'},
+  {id:'home',title:'文具回家',book:'lower',kind:'原创短文',body:'写完作业，@发现铅笔还躺在桌上。\n@打开笔盒，让铅笔回到自己的家。\n橡皮、尺子也摆放得整整齐齐。\n第二天，@很快就找到了需要的文具。'},
+  {id:'thankyou',title:'谢谢你',book:'lower',kind:'原创短文',body:'@的画纸掉到了地上，朋友帮忙捡了起来。\n@接过画纸，认真地说：“谢谢你！”\n朋友笑着说：“不客气。”\n一句礼貌的话，让两个人的心里都暖暖的。'}
+];
+if(typeof module!=='undefined')module.exports=READINGS;
