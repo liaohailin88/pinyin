@@ -20,7 +20,7 @@ const spoken=[];
 w.speechSynthesis={getVoices:()=>[],cancel(){},speak:u=>spoken.push(u.text)};
 w.SpeechSynthesisUtterance=function(text){this.text=text};
 w.HTMLElement.prototype.scrollIntoView=function(){};
-for(const file of ['vendor/pinyin-pro.js','curriculum.js','examples.js','readings.js','provided-readings.js','catalogue.js','learning.js','catalogue-ui.js','teacher-focus.js','app.js'])new vm.Script(fs.readFileSync(file,'utf8'),{filename:file}).runInContext(ctx);
+for(const file of ['vendor/pinyin-pro.js','curriculum.js','examples.js','readings.js','provided-readings.js','catalogue.js','profiles.js','learning.js','catalogue-ui.js','teacher-focus.js','yimi-data.js','yimi.js','app.js'])new vm.Script(fs.readFileSync(file,'utf8'),{filename:file}).runInContext(ctx);
 function plain(node){const c=node.cloneNode(true);c.querySelectorAll('rt').forEach(r=>r.remove());return c.textContent}
 function change(node,value,event='change'){node.value=value;node.dispatchEvent(new w.Event(event,{bubbles:true}))}
 function clickText(text){const b=[...d.querySelectorAll('button')].find(b=>plain(b)===text);assert(b,`Button missing: ${text}`);b.click()}
@@ -69,7 +69,7 @@ clickText('🔊 全篇朗读');assert(spoken.at(-1).startsWith('廖八一认真�
 clickText('删除这篇');assert.equal(JSON.parse(w.localStorage.getItem('sprout-readings')).length,0);
 const toggle=d.querySelector('#pinyin-toggle');toggle.checked=false;toggle.dispatchEvent(new w.Event('change'));assert(d.body.classList.contains('hide-pinyin'));
 toggle.checked=true;toggle.dispatchEvent(new w.Event('change'));assert(!d.body.classList.contains('hide-pinyin'));
-for(const b of d.querySelectorAll('nav button')){b.click();coverage(d.querySelector('main'))}
+for(const b of d.querySelectorAll('#bayi-nav button')){b.click();coverage(d.querySelector('main'))}
 assert.equal(w.pronunciations('乐园').join(' '),'lè yuán');
 for(const name of ['廖八一'])assert.equal(w.pronunciations(name).length,3);
 for(const story of provided){const chunks=w.speechChunks(story.body);assert.equal(chunks.join(''),story.body);assert(chunks.every(c=>c.length<=60))}
