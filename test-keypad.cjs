@@ -1,0 +1,33 @@
+const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),{JSDOM}=require('jsdom');
+const html=fs.readFileSync('index.html','utf8');
+const dom=new JSDOM(html,{url:'https://example.test/',runScripts:'outside-only'}),w=dom.window,d=w.document,ctx=dom.getInternalVMContext();
+w.HTMLElement.prototype.scrollIntoView=function(){};
+for(const match of html.matchAll(/<script src="([^"?]+)(?:\?[^"]*)?"><\/script>/g))new vm.Script(fs.readFileSync(match[1],'utf8'),{filename:match[1]}).runInContext(ctx);
+const plain=node=>{const clone=node.cloneNode(true);clone.querySelectorAll('rt').forEach(x=>x.remove());return clone.textContent};
+const button=text=>{const b=[...d.querySelectorAll('#content button')].find(x=>plain(x)===text);assert(b,'Missing button '+text);return b};
+const tap=key=>{const b=d.querySelector('[data-key="'+key+'"]');assert(b,'Missing key '+key);assert.equal(b.type,'button');b.click()};
+const answer=()=>d.querySelector('.quiz input');
+const submit=()=>button('检查答案').click();
+const stars=()=>Number(d.querySelector('#stars').textContent);
+const key=key=>answer().dispatchEvent(new w.KeyboardEvent('keydown',{key,bubbles:true,cancelable:true}));
+const load=(a,b,op,correct,mult=false)=>vm.runInContext(`quiz={a:${a},b:${b},op:${JSON.stringify(op)},answer:${correct},done:false};showQuiz(${mult})`,ctx);
+d.querySelector('[data-tab="math"]').click();
+assert.equal(d.querySelectorAll('.math-keypad button').length,12);assert.equal(d.querySelector('[data-key="delete"]').getAttribute('aria-label'),'删除一位');assert.equal(d.querySelector('[data-key="1"]').getAttribute('aria-label'),'数字1');
+assert(answer().readOnly);assert.equal(answer().inputMode,'none');assert.equal(answer().value,'');
+const before=stars();submit();assert(plain(d.querySelector('.quiz .feedback')).includes('先点数字'));assert.equal(stars(),before);
+tap('1');tap('2');tap('3');tap('4');assert.equal(answer().value,'123');
+tap('delete');assert.equal(answer().value,'12');assert.equal(plain(d.querySelector('.quiz .feedback')),'');
+tap('clear');assert.equal(answer().value,'');tap('delete');assert.equal(answer().value,'');
+tap('0');tap('0');tap('5');assert.equal(answer().value,'5');tap('clear');
+load(9,9,'−',0);tap('1');submit();assert(plain(d.querySelector('.quiz .feedback')).includes('再想'));assert.equal(stars(),before);
+tap('clear');tap('0');submit();assert(plain(d.querySelector('.quiz .feedback')).includes('答对'));assert.equal(stars(),before+1);submit();assert.equal(stars(),before+1);
+load(120,80,'+',200);for(const digit of '200')tap(digit);submit();assert(plain(d.querySelector('.quiz .feedback')).includes('答对'));assert.equal(stars(),before+2);
+button('下一题 →').click();assert.equal(answer().value,'');assert.equal(plain(d.querySelector('.quiz .feedback')),'');
+assert.equal(d.activeElement.tagName,'BODY'); // Touch entry does not depend on focusing the answer.
+for(const text of ['20 以内','100 以内','200 以内']){button(text).click();assert(answer().readOnly);assert.equal(answer().value,'');assert.equal(d.querySelectorAll('.math-keypad').length,1)}
+load(100,23,'+',123);answer().focus();for(const digit of '124')key(digit);key('Backspace');key('3');assert.equal(answer().value,'123');key('Enter');assert(plain(d.querySelector('.quiz .feedback')).includes('答对'));
+key('Delete');assert.equal(answer().value,'');key('7');key('Escape');assert.equal(answer().value,'');
+const nextEvent=new w.KeyboardEvent('keydown',{key:'Enter',bubbles:true,cancelable:true});button('下一题 →').dispatchEvent(nextEvent);assert(!nextEvent.defaultPrevented,'Native Enter activation must remain available on buttons');
+d.querySelector('[data-tab="multiply"]').click();button('乘法练习').click();assert.equal(d.querySelectorAll('.math-keypad').length,1);load(9,9,'×',81,true);tap('8');tap('1');submit();assert(plain(d.querySelector('.quiz .feedback')).includes('答对'));button('下一题 →').click();assert.equal(answer().value,'');assert(plain(d.querySelector('.quiz')).includes('乘法小挑战'));
+d.querySelector('[data-tab="reading"]').click();assert.equal(d.querySelectorAll('.math-keypad').length,0);
+dom.window.close();console.log('PASS: touch keypad without input focus; readonly keyboard suppression; digit/delete/clear/length; 0 and 200 answers; wrong/repeated submissions; range and multiplication transitions; physical keyboard.');
