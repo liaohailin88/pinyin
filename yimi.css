@@ -3,3 +3,5 @@
 @media(max-width:700px){.learner-switch{gap:8px}.learner-switch button{padding:12px 14px}.yimi-mode #yimi-nav{grid-template-columns:repeat(3,minmax(0,1fr))}.yimi-card-grid{grid-template-columns:minmax(0,1fr);gap:12px}.yimi-card{padding:19px}.yimi-card h3{font-size:24px}.yimi-reading .reading-line{font-size:20px}.yimi-mode .hero h1{font-size:25px}.yimi-outline,.yimi-think,.yimi-choice{padding:18px}.learner-switch small{font-size:11px}.yimi-draft{font-size:17px}}
 
 .yimi-library-count{padding:12px 16px;background:#f0eaf8;border-radius:12px;color:#655080;font-weight:600;line-height:1.8}.yimi-model{white-space:pre-wrap;font-size:18px;line-height:2}
+
+.english-context{font-family:Arial,sans-serif;font-size:21px!important;line-height:1.7!important;color:#4c3f68}.english-translation{font-size:17px!important}.yimi-guidance{margin:16px 0 22px;padding:15px 18px;background:#f2f6ec;border-radius:12px;line-height:2}.yimi-guidance summary{cursor:pointer;font-weight:600}.yimi-guidance p{font-size:17px}.yimi-guidance .actions{flex-wrap:wrap}
