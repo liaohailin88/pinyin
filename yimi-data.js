@@ -116,4 +116,5 @@ const YIMI_ENGLISH_READINGS = [
   {id:'en-friend',title:'A Helpful Friend',body:'Amy is my friend. She is quiet and friendly. One day, I cannot find my pencil. Amy gives me a pencil. After class, I find my pencil under the chair. I say thank you to Amy.',translation:'艾米是我的朋友，她安静而友好。有一天我找不到铅笔，她借给我一支。课后我在椅子下面找到了自己的铅笔，并向艾米道谢。',question:'Where does the writer find the pencil?',options:['In the kitchen.','Under the chair.','On the bed.'],answer:1},
   {id:'en-dinner',title:'Dinner Is Ready',body:'It is dinner time. I would like some rice and vegetables. Bayi would like some noodles. We wash our hands before dinner. The soup is hot. We wait and eat slowly. We say thank you to our parents.',translation:'晚饭时间到了。我想吃米饭和蔬菜，八一想吃面条。饭前我们洗手。汤很烫，我们等一等，慢慢吃，并向父母道谢。',question:'What do they do before dinner?',options:['Read a book.','Clean a window.','Wash their hands.'],answer:2}
 ];
-if(typeof module!=='undefined')module.exports={YIMI_WORDS,YIMI_IDIOMS,YIMI_READINGS,YIMI_TALES,YIMI_WRITING,YIMI_ENGLISH,YIMI_PHONICS,YIMI_ENGLISH_READINGS};
+const yimiLibrary={YIMI_WORDS,YIMI_IDIOMS,YIMI_READINGS,YIMI_TALES,YIMI_WRITING,YIMI_ENGLISH,YIMI_PHONICS,YIMI_ENGLISH_READINGS};
+if(typeof module!=='undefined'){require('./yimi-extra')(yimiLibrary);module.exports=yimiLibrary}else expandYimiContent(yimiLibrary);

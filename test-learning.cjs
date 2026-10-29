@@ -20,7 +20,7 @@ const spoken=[];
 w.speechSynthesis={getVoices:()=>[],cancel(){},speak:u=>spoken.push(u.text)};
 w.SpeechSynthesisUtterance=function(text){this.text=text};
 w.HTMLElement.prototype.scrollIntoView=function(){};
-for(const file of ['vendor/pinyin-pro.js','curriculum.js','examples.js','readings.js','provided-readings.js','catalogue.js','profiles.js','learning.js','catalogue-ui.js','teacher-focus.js','yimi-data.js','yimi.js','app.js'])new vm.Script(fs.readFileSync(file,'utf8'),{filename:file}).runInContext(ctx);
+for(const file of ['vendor/pinyin-pro.js','curriculum.js','examples.js','readings.js','provided-readings.js','catalogue.js','profiles.js','learning.js','catalogue-ui.js','teacher-focus.js','yimi-extra.js','yimi-data.js','yimi.js','app.js'])new vm.Script(fs.readFileSync(file,'utf8'),{filename:file}).runInContext(ctx);
 function plain(node){const c=node.cloneNode(true);c.querySelectorAll('rt').forEach(r=>r.remove());return c.textContent}
 function change(node,value,event='change'){node.value=value;node.dispatchEvent(new w.Event(event,{bubbles:true}))}
 function clickText(text){const b=[...d.querySelectorAll('button')].find(b=>plain(b)===text);assert(b,`Button missing: ${text}`);b.click()}
