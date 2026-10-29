@@ -9,7 +9,7 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
-    "test": "node verify.cjs && node test-learning.cjs && node test-yimi.cjs && node test-keypad.cjs",
+    "test": "node verify.cjs && node test-learning.cjs && node test-yimi.cjs && node test-keypad.cjs && node test-games.cjs",
     "build": "node build.cjs"
   }
 }

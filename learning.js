@@ -7,6 +7,7 @@ try {
   if(Array.isArray(stored))customReadings=stored.filter(s=>s&&typeof s.id==='string'&&typeof s.title==='string'&&typeof s.body==='string').slice(0,200).map(s=>({...s,title:s.title.slice(0,40),body:s.body.slice(0,3000),kind:'家长添加',book:'custom'}));
 }catch{}
 const pyCache=new Map();
+pinyinPro.customPinyin(Object.fromEntries([['每行','měi háng'],['行、列','háng 、 liè'],...Array.from({length:9},(_,i)=>['第'+(i+1)+'行','dì '+(i+1)+' háng'])]));
 pinyinPro.customPinyin({'小薏米':'xiǎo yì mǐ','未肯降':'wèi kěn xiáng','人未还':'rén wèi huán','不教胡马':'bù jiào hú mǎ','乐园':'lè yuán','廖八一':'liào bā yī','一只':'yì zhī','这个':'zhè ge','那个':'nà ge','怎么':'zěn me','什么':'shén me','我们':'wǒ men','你们':'nǐ men','他们':'tā men','它们':'tā men','她们':'tā men','谁知':'shuí zhī','不解':'bù jiě','藏踪迹':'cáng zōng jì','才露':'cái lù','一行字':'yì háng zì','长短':'cháng duǎn','长高':'zhǎng gāo','数数':'shǔ shù','得去':'děi qù','结果实':'jiē guǒ shí','树干':'shù gàn','挑水':'tiāo shuǐ','挣断':'zhèng duàn','睡着':'shuì zháo','着急':'zháo jí','长出':'zhǎng chū','长满':'zhǎng mǎn','系鞋带':'jì xié dài','结得':'jiē de','空着手':'kōng zhe shǒu'});
 function pronunciations(text){if(!pyCache.has(text)){if(pyCache.size>3000)pyCache.clear();pyCache.set(text,pinyinPro.pinyin(text,{type:'array',toneSandhi:true,nonZh:'consecutive'}))}return pyCache.get(text)}
 function substitute(text){return text.replaceAll('@',learner)}
