@@ -1,6 +1,6 @@
-// Textbook-style single-storey a. Keep answer keys and speech payloads unchanged.
-function pinyinDisplay(text){return String(text).replace(/[aāáǎà]/g,c=>({a:'ɑ','ā':'ɑ\u0304','á':'ɑ\u0301','ǎ':'ɑ\u030c','à':'ɑ\u0300'}[c]))}
-function displayPinyinIn(root){if(!root)return;const targets=[...root.querySelectorAll('rt,.phonetic,.spell-prompt,.spell-option,.spell-answer,.word-test-clue')];if(activeLearner==='bayi'&&['pinyin','spell'].includes(current)){const content=root.closest?.('#content')?root:root.querySelector('#content');if(content)targets.push(content)}for(const target of targets){const walker=document.createTreeWalker(target,NodeFilter.SHOW_TEXT);let n;while(n=walker.nextNode()){if(n.parentElement.closest('script,style,input,textarea,select'))continue;n.textContent=pinyinDisplay(n.textContent)}}}
+// Keep precomposed pinyin tone characters; the bundled Andika font supplies textbook letter shapes.
+function pinyinDisplay(text){return String(text).normalize('NFC')}
+function displayPinyinIn(root){if(!root)return;root.querySelector('#content')?.classList.toggle('textbook-pinyin',activeLearner==='bayi'&&current==='pinyin');for(const target of root.querySelectorAll('rt,.phonetic,.spell-prompt,.spell-option,.spell-answer,.word-test-clue'))target.classList.add('textbook-pinyin');if(activeLearner==='bayi'&&current==='pinyin'){const content=root.closest?.('#content')?root:root.querySelector('#content');if(content)content.classList.add('textbook-pinyin')}}
 let providedBook='upper';
 let learner=LEARNERS[activeLearner].name,showPinyin=activeLearner==='bayi',wordBook=0,wordType='all',wordLesson='all',wordSearch='',wordPage=0,selectedChar=null,readingId='jiangnan',customReadings=[];
 try {
