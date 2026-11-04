@@ -25,7 +25,7 @@ function playPinyinSequence(segments){
   step(0);
 }
 function playPinyinBlob(blob,done,id=pinyinPlayId){
-  const url=URL.createObjectURL(blob),audio=new Audio(url);pinyinAudio=audio;let finished=false;
+  const url=URL.createObjectURL(blob),audio=new Audio(url);audio.playbackRate=getReadingRate();audio.preservesPitch=true;pinyinAudio=audio;let finished=false;
   const cleanup=()=>{URL.revokeObjectURL(url);audio.onended=null;audio.onerror=null};pinyinAudioCleanup=cleanup;
   const finish=failed=>{if(finished)return;finished=true;cleanup();if(pinyinAudio===audio){pinyinAudio=null;pinyinAudioCleanup=null}if(failed&&id===pinyinPlayId)toast('这段音频无法播放，请换成MP3/M4A，或在本机重新录制。');if(id===pinyinPlayId)done?.()};
   audio.onended=()=>finish(false);audio.onerror=()=>finish(true);audio.play().catch(()=>finish(true));

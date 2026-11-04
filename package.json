@@ -10,7 +10,7 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
-    "test": "node verify.cjs && node test-learning.cjs && node test-yimi.cjs && node test-keypad.cjs && node test-games.cjs && node test-word-test.cjs && node test-picture-math.cjs && node test-pinyin-spell.cjs && node test-pinyin-voices.cjs",
+    "test": "node verify.cjs && node test-learning.cjs && node test-yimi.cjs && node test-keypad.cjs && node test-games.cjs && node test-word-test.cjs && node test-picture-math.cjs && node test-pinyin-spell.cjs && node test-pinyin-voices.cjs && node test-reading-speed.cjs",
     "build": "node build.cjs"
   }
 }
