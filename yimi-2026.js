@@ -1,5 +1,5 @@
 // 独立保留资料的六个单元，不混入原有通用上下册主题。
-let yimi2026Unit=0,yimi2026Mode='words',yimi2026Page=0,yimi2026Round=null;
+let yimi2026Unit=0,yimi2026Mode='words',yimi2026Page=0,yimi2026Round=null,yimi2026Writing=0;
 function yimi2026Shuffle(items){const a=[...items];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function yimi2026Bank(index){return YIMI_2026.flatMap((u,i)=>index==='all'||i===Number(index)?[...u.words,...u.phrases].map(([en,zh])=>({id:i+':'+en,en,zh})):[])}
 function yimi2026Start(index){const pool=yimi2026Bank(index);const unique=[...new Map(pool.map(x=>[x.en,x])).values()];yimi2026Round={index,items:yimi2026Shuffle(unique).slice(0,10).map(item=>({item,options:yimi2026Shuffle([item,...yimi2026Shuffle(unique.filter(x=>x.zh!==item.zh&&x.en!==item.en)).slice(0,3)]),chosen:null})),position:0,correct:0};render()}
@@ -7,7 +7,8 @@ function renderYimi2026(){const host=document.querySelector('#content'),unit=YIM
   host.append(el('p','按家长提供的《2026新版四上人教英语知识点总结》7页整理。6个单元，含单词、短语、句型、语音和语法；检测题为配套练习。','hint'));
   const link=el('a','查看原资料 PDF','secondary');link.href='media/yimi-2026-english.pdf#page='+(yimi2026Unit+1);link.target='_blank';link.rel='noopener';host.append(link);
   host.append(yimiSelect('选择2026四上单元',YIMI_2026.map((u,i)=>[String(i),`Unit ${i+1} ${u.title}`]),String(yimi2026Unit),v=>{yimi2026Unit=Number(v);yimi2026Page=0;render()}));
-  const tabs=el('div','','filters');[['单词点读','words'],['常用短语','phrases'],['句型跟读','sentences'],['语音与语法','grammar'],['随机检测','test']].forEach(([label,id])=>tabs.append(yimiButton(label,()=>{yimi2026Mode=id;yimi2026Page=0;render()},yimi2026Mode===id?'selected':'secondary')));host.append(tabs);
+  const tabs=el('div','','filters');[['单词点读','words'],['常用短语','phrases'],['句型跟读','sentences'],['语音与语法','grammar'],['随机检测','test'],['书面表达','writing']].forEach(([label,id])=>tabs.append(yimiButton(label,()=>{yimi2026Mode=id;yimi2026Page=0;render()},yimi2026Mode===id?'selected':'secondary')));host.append(tabs);
+  if(yimi2026Mode==='writing')renderYimi2026Writing(host);
   if(['words','phrases','sentences'].includes(yimi2026Mode)){
     const entries=unit[yimi2026Mode],pages=Math.ceil(entries.length/6),grid=el('div','','yimi-card-grid english-2026-cards');
     entries.slice(yimi2026Page*6,yimi2026Page*6+6).forEach(([en,zh])=>{const card=el('article','','yimi-card'),line=el('p',en,'english-sentence');line.lang='en';card.append(line,el('p',zh),yimiButton('🔊 听英语',()=>yimiSpeak(en),'primary'));

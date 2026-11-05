@@ -15,4 +15,10 @@ const select=d.querySelector('[aria-label="检测范围"]');select.value='all';s
 assert.equal(vm.runInContext('new Set(yimi2026Round.items.map(x=>x.item.en)).size',ctx),10);
 for(let i=0;i<10;i++){const answer=vm.runInContext('yimi2026Round.items[yimi2026Round.position].item.en',ctx);[...d.querySelectorAll('[data-answer]')].find(b=>b.dataset.answer===answer).click();assert.equal(d.querySelectorAll('[data-answer]:disabled').length,4);click('下一题 →')}
 assert(d.querySelector('#content').textContent.includes('10/10'));click('随机出10题');assert.equal(vm.runInContext('yimi2026Round.position',ctx),0);
+click('书面表达');assert(plain(d.querySelector('table')).includes('Tom'));assert(!d.querySelector('.english-writing-model').open);
+const area=d.querySelector('[aria-label="英语作文草稿"]');area.value="My name is Tom. I'm tall. I have short hair. I'm quiet. I am a doctor. My favourite place is the park. I often take a walk there.";area.dispatchEvent(new w.Event('input'));click('检查句数');assert(plain(d.querySelector('#content')).includes('7 句'));
+const savedText=area.value;const check=d.querySelector('[data-writing-check]');check.checked=true;check.dispatchEvent(new w.Event('change'));
+const choose=value=>{const s=d.querySelector('[aria-label="选择书面表达题目"]');s.value=value;s.dispatchEvent(new w.Event('change'))};choose('1');assert.equal(d.querySelector('textarea').value,'');choose('0');assert.equal(d.querySelector('textarea').value,savedText);assert(d.querySelector('[data-writing-check]').checked);
+click('🔊 My name is Tom.');assert.equal(spoken.at(-1).text,'My name is Tom.');assert.equal(spoken.at(-1).lang,'en-US');
+choose('7');assert(vm.runInContext('yimiEnglishWritingLines(YIMI_ENGLISH_WRITING[7])[4]',ctx).includes('an office worker'));click('随机换一道');assert.notEqual(d.querySelector('[aria-label="选择书面表达题目"]').value,'7');
 dom.window.close();console.log('2026 English: six units, audio, spelling, scope, unique random questions and scoring passed.');

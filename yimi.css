@@ -5,3 +5,5 @@
 .yimi-library-count{padding:12px 16px;background:#f0eaf8;border-radius:12px;color:#655080;font-weight:600;line-height:1.8}.yimi-model{white-space:pre-wrap;font-size:18px;line-height:2}
 
 .english-context{font-family:Arial,sans-serif;font-size:21px!important;line-height:1.7!important;color:#4c3f68}.english-translation{font-size:17px!important}.yimi-guidance{margin:16px 0 22px;padding:15px 18px;background:#f2f6ec;border-radius:12px;line-height:2}.yimi-guidance summary{cursor:pointer;font-weight:600}.yimi-guidance p{font-size:17px}.yimi-guidance .actions{flex-wrap:wrap}
+
+.english-writing-table{width:100%;border-collapse:collapse;margin:20px 0;table-layout:fixed}.english-writing-table caption{text-align:left;font-weight:700;padding:10px}.english-writing-table th,.english-writing-table td{border:2px solid white;padding:12px;text-align:left;overflow-wrap:anywhere;background:#eeebf6}.english-writing-table th{width:48%;font-weight:500}.english-writing-check{display:flex;gap:10px;align-items:center;margin:12px 0}.english-writing-check input{width:22px;height:22px;flex-shrink:0}.english-writing-model .english-sentence{margin-top:20px}
