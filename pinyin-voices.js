@@ -13,7 +13,7 @@ const pinyinVoiceReady=new Promise(resolve=>{
   request.onsuccess=()=>{pinyinVoiceDB=request.result;pinyinVoiceDB.onversionchange=()=>pinyinVoiceDB.close();const tx=pinyinVoiceDB.transaction('voices'),all=tx.objectStore('voices').getAll();all.onsuccess=()=>{for(const row of all.result)if(row.blob instanceof Blob&&row.blob.size)pinyinVoices.set(row.key,row);resolve(true)};all.onerror=()=>resolve(false)};
 }).then(ok=>{pinyinVoicesLoaded=true;return ok});
 function pinyinVoiceKeys(){return [...new Set([...py.flatMap(row=>row[1]),'ia','iao','ian','iang','iong','ua','uo','uai','uan','uang','ue',...buildSpellBank().map(q=>q.tone)])]}
-function stopPinyinPlayback(){pinyinPlayId++;if(pinyinAudio){pinyinAudio.pause();pinyinAudio=null}if(pinyinAudioCleanup){pinyinAudioCleanup();pinyinAudioCleanup=null}if('speechSynthesis'in window)speechSynthesis.cancel()}
+function stopPinyinPlayback(){document.querySelectorAll('#content video').forEach(video=>{if(!video.paused)video.pause()});pinyinPlayId++;if(pinyinAudio){pinyinAudio.pause();pinyinAudio=null}if(pinyinAudioCleanup){pinyinAudioCleanup();pinyinAudioCleanup=null}if('speechSynthesis'in window)speechSynthesis.cancel()}
 function playPinyinSequence(segments){
   stopPinyinPlayback();const id=pinyinPlayId;if(!pinyinVoicesLoaded){pinyinVoiceReady.then(()=>{if(id===pinyinPlayId)playPinyinSequence(segments)});return}const missing=segments.filter(s=>s.key&&PINYIN_NEEDS_HUMAN.has(s.key)&&!pinyinVoices.has(s.key));
   if(missing.length)toast([...new Set(missing.map(s=>s.key))].join('、')+' 尚未录入人声，已跳过近似读音；请打开“家长示范音”。');
